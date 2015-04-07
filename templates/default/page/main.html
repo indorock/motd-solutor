@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="SemiColonWeb" />
+    <!--  Favicon               -->
+    <link rel="shortcut icon" href="{$skinroot}favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{$skinroot}favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- LESS Stylesheets
+    ============================================= -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+
+    {if true || $cfg->getData('deploymentmode','production') == "development"}
+    <link href="{$skinroot}less/main.less" media="all" rel="stylesheet" type="text/less" />
+    <script>{literal}
+    var ls = window.localStorage;
+    if(ls){
+        var i=0,k;
+        while(k = ls.key(i++))
+            if(k.indexOf('.less') !== -1)
+                ls.removeItem(k);
+    }
+    {/literal}</script>
+    <script src="{$skinroot}/js/less-1.7.3.min.js"></script>
+    {else}
+    <link href="{$skinroot}css/main.css" media="all" type="text/css" rel="stylesheet" />
+    {/if}
+
+    {if $isInlineTranslate}
+    <script>
+        basedir = '{$basedir}';
+        webroot = '{$webroot}';
+        backend = false;
+        TRANSLATE = true;
+        TRANSLATE_LANG = '{$app->getLang()}'</script>
+    <script src="{$webroot}js/boot.js"></script>
+    <script src="{$webroot}js/cwelm.js"></script>
+    <link href="{$webroot}skin/translate-inline.css" rel="stylesheet" type="text/css"/>
+    <script src="{$webroot}js/translate-inline-cw.js"></script>
+    {/if}
+
+
+    <!-- Javascripts
+    ============================================= -->
+    <script type="text/javascript" src="{$skinroot}js/jquery.js"></script>
+    <script type="text/javascript" src="{$skinroot}js/global.js"></script>
+
+
+    <!--[if lt IE 9]>
+    	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+    {if $isInlineTranslate}
+        <script>
+            basedir = '{$basedir}';
+            webroot = '{$webroot}';
+            backend = false;
+            TRANSLATE = true;
+            TRANSLATE_LANG = '{$app->getLang()}'</script>
+        <script src="{$webroot}js/boot.js"></script>
+        <script src="{$webroot}js/cwelm.js"></script>
+        <link href="{$webroot}skin/translate-inline.css" rel="stylesheet" type="text/css"/>
+        <script src="{$webroot}js/translate-inline-cw.js"></script>
+    {/if}
+
+    <title>Home</title>
+
+</head>
+<body>
+
+    <div id="wrapper" class="clearfix">
+        {include file="page/header.html"}
+        {include file="$template"}
+        {include file="page/footer.html"}
+    </div>
+
+</body>
+</html>
+
+

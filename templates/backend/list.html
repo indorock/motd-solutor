@@ -1,0 +1,16 @@
+<div class="list-page">
+    <span class="name">{$listtitle}</span>
+</div>
+<div class="container clearfix" id="mainholder">
+</div>
+
+
+<script>{literal}
+var root = new RootElement(cw.$('mainholder'));
+root.setCfg( {
+    childs:[{
+        "classType":"gridview",
+        "Classname":"gridview"
+    }]
+});
+{/literal}</script>

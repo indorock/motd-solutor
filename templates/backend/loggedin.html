@@ -1,0 +1,26 @@
+<div id="head">
+    <div class="topbar">
+        <div class="topbar-inner">
+            <ul class="nav">
+            </ul>
+
+            <ul class="nav rightnav">
+                <li class="dropdown">
+                    <a class="userpic dropdown-toggle" href="{$basedir}dashboard">{$actuser->getName()}</a>
+                </li>
+                <li><a href="{$basedir}logout">Logout</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="logobar clearfix">
+    <a href="{$basedir}"><img src="{$skinroot}backend/images/logo.png"></a>
+    <h1>{translate txt="Admin"}</h1>
+</div>
+
+<div id="container">
+    <div id="main">
+        {include file=$subtemplate}
+    </div>
+</div>

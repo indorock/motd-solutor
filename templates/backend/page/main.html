@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>{if $title}{$title}{else} {translate txt="Title Backend"} {/if}</title>
+    <script>basedir= '{$basedir}'; webroot = '{$webroot}'; backend = true;</script>
+
+    <script src="{$webroot}js/ext-all-debug.js"></script>
+    <script src="{$webroot}js/ext-axd.js"></script>
+    <link rel="stylesheet" type="text/css" href="{$webroot}skin/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="{$webroot}skin/icons.css">
+
+    <!-- script src="{$webroot}js/prototype.js"></script -->
+    <script src="{$webroot}js/boot.js"></script>
+    <script src="{$webroot}js/cwelm.js"></script>
+    <script src="{$webroot}js/cwcmp.js"></script>
+
+    <script src="{$webroot}js/cwmdm.js"></script>
+    <script src="{$webroot}js/cwgrid.js"></script>
+    <script src="{$webroot}js/cwextgrid.js"></script>
+
+    <script src="{$webroot}js/cwfrmeditor.js"></script>
+    <script src="{$webroot}js/cwfrmviewer.js"></script>
+
+    <script src="{$skinroot}js/jquery-1.11.1.min.js"></script>
+
+    <!-- script src="{$jsroot}main.js"></script>
+
+    <script language="javascript" src="{$webroot}js/protoplasm/protoplasm.js"></script -->
+
+    <link rel="stylesheet" type="text/css" href="{$webroot}skin/magentofrm.css">
+    <link rel="stylesheet/less" type="text/css" href="{$skinroot}backend/main.less">
+    {if $useToolsCss}
+    <link rel="stylesheet" type="text/css" href="{$skinroot}backend/tools.css">
+    {/if}
+
+    <script>window.localStorage.clear()</script>
+    <script src="{$webroot}js/less-1.3.0.min.js"></script>
+
+    {foreach from=$javascript item=entry}
+    <script src="{$jsroot}{$entry}"></script>
+    {/foreach}
+
+    {if $isInlineTranslate}
+    <link href="{$webroot}skin/translate-inline.css" rel="stylesheet" type="text/css" />
+    <script src="{$webroot}js/translate-inline.js"></script>
+    {/if}
+
+</head>
+<body class="{$pagesearch|replace:'/':'_'}">
+
+<div id="loading-mask" style="display:none">
+    <p class="loader" id="loading_mask_loader"><span></span><br/>Please wait...</p>
+</div>
+<script>{literal}
+function showLoading(){
+    cw.$('loading-mask').css('display', 'block');
+}
+function hideLoading(){
+    cw.$('loading-mask').css('display', 'none');
+}
+{/literal}</script>
+
+
+{include file="$template"}
+
+<body>
+</html>

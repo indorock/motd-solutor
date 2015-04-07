@@ -1,0 +1,45 @@
+<root>
+    <default>
+        <translate>0</translate>
+        <basedir>/</basedir>
+        <webroot>/</webroot>
+        <smtp_debug>0</smtp_debug>
+        <cache_enabled>0</cache_enabled>
+        <csrf_protection_enable>1</csrf_protection_enable>
+
+        <!-- Paths -->
+        <datadir>motd</datadir>
+        <pagedir>controller</pagedir>
+        <template>templates/default</template>
+        <template_c>templates_c</template_c>
+        <observer></observer>
+
+        <!-- Models -->
+        <router><![CDATA[motd/model/router]]></router>
+        <default_handler><![CDATA[cms.php]]></default_handler>
+
+        <database>
+            <dns>mysql://dbuser:password@localhost/unikrn_motd</dns>
+        </database>
+
+    </default>
+
+    <router>
+
+        <backend>
+            <translate>0</translate>
+            <host>adm.unikrn-motd.vm1</host>
+            <basedir></basedir>
+            <default_handler>../controller/cms.php</default_handler>
+
+            <pagedir>controller/backend</pagedir>
+            <template>templates/backend</template>
+            <template_c>templates_c/backend</template_c>
+        </backend>
+
+        <front>
+            <host>unikrn-motd.vm1</host>
+        </front>
+
+    </router>
+</root>
