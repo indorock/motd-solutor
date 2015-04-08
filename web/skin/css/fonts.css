@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'knockout31';
+    font-style: normal;
+    font-weight: 100;
+    src: local('knockout31'), local('knockout31'), url(../font/knockout31.otf) format('opentype');
+}
+@font-face {
+    font-family: 'knockout50';
+    font-style: normal;
+    font-weight: 400;
+    src: local('knockout50'), local('knockout50'), url(../font/knockout50.otf) format('opentype');
+}
+@font-face {
+    font-family: 'knockout68';
+    font-style: normal;
+    font-weight: 400;
+    src: local('knockout68'), local('knockout68'), url(../font/knockout68.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'robo-reg';
+    font-style: normal;
+    font-weight: 400;
+    src: local('robo-reg'), local('robo-reg'), url(../font/robo-reg.ttf) format('truetype');
+}

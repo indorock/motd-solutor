@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MOTD</title>
+
+    <style type="text/css">
+        {literal}
+        /*--Reset*/
+        * {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+        body{line-height:1}
+        article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+        nav ul{list-style:none}
+        blockquote,q{quotes:none}
+        blockquote:before,blockquote:after,q:before,q:after{content:none}
+        a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+        ins{background-color:#ff9;color:#000;text-decoration:none}
+        mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+        del{text-decoration:line-through}
+        abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+        table{border-collapse:collapse;border-spacing:0}
+        hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+        input,select{vertical-align:middle}
+        ul{list-style: none;}
+        .clearfix:before, .clearfix:after{content: " ";display: table;}
+        .clearfix:after{clear: both;}
+
+        body{color:#ffffff;background:#000000;}
+        #signup{font-family: "robo-reg", sans-serif;font-size: 14px; margin: auto;background-repeat:no-repeat;position:relative;}
+        #signup form{margin-left: 280px;}
+        #signup .input{margin-top:10px;padding: 0 10px; font-family:'robo-reg', sans-serif; font-size:16px;background-color:#ffffff;height:30px;line-height:30px;width:280px;display:block;float:left;margin-right:15px;}
+        #signup .age{margin-top:8px;}
+        #signup .age input{margin-right:5px;}
+        #signup .submit{margin-top:10px;min-width:95px;max-width:120px;height:30px;line-height:30px; display:block;float:left;padding:0 5px; cursor:pointer; color:#fff; font-size:15px;text-align: center;background: rgb(254,0,0); background: -webkit-linear-gradient(top, #cc0000 0%,#990000 100%); background: linear-gradient(to bottom, #cc0000 0%,#990000 100%); box-shadow: 5px 11px 5px 0 rgba(34,30,31,0.17);}
+        #signup .submit:hover{background: -webkit-linear-gradient(top, #990000 0%, #cc0000 100%); background: linear-gradient(to bottom, #990000 0%, #cc0000 100%);}
+        #signup .submit:disabled {border-color: transparent;cursor: default;opacity: 0.25;}
+        #signup .submit:disabled:hover{background: -webkit-linear-gradient(top,#cc0000 0%, #990000 100%);background: linear-gradient(to bottom, #cc0000 0%, #990000 100%);}
+        #signup .age label{font-size:14px;}
+        #signup .message{margin-left: 280px;padding-top:30px;}
+        .error{color:#ff0000;}
+        #agewarning{font-size:12px;position: absolute; bottom:10px; color:#aaaaaa;}
+        {/literal}
+    </style>
+
+    <style type="text/css">
+        @import "{$skinroot}css/fonts.css";
+    </style>
+
+</head>
+<body>
+
+<div id="signup" style="width:{$campaign->getWidth()}px; height:{$campaign->getHeight()}px;background-image:url('{$skinroot}img/bgs/bg_campaign_{$campaign->getId()}.jpg')">
+
+{if $request->getParam('success')}
+    <div class="message">{translate txt="signup_success_text"}</div>
+{else}
+    <form action="{$basedir}signup/post" method="post">
+        <input type="hidden" name="campaign_id" value="{$campaign->getId()}">
+        <div class="clearfix">
+            {if 'email'|in_array:$errors}<div class="error">{translate txt="error_email_text"}</div>{/if}
+            <input type="email" class="input" data-validate="email" name="email" id="email" placeholder="{translate txt='motd_email_placeholder'}" value="{$email}" required>
+            <input type="submit" id="submitbtn" class="btn submit" disabled value="{translate txt='motd_submit'}">
+        </div>
+        <div class="age">
+            {if 'age'|in_array:$errors}<div class="error">{translate txt="error_age_text"}</div>{/if}
+            <input type="checkbox" name="agecheck" id="agecheck" required>
+            <label for="agecheck">{translate txt="label_age_check"}</label>
+        </div>
+        <div id="agewarning">{translate txt="age_warning"}</div>
+    </form>
+{/if}
+</div>
+</body>
+{literal}
+<script type="text/javascript">
+var d = document;
+var e = d.getElementById('email')
+var age = document.getElementById('agecheck');
+
+function checkAge(){
+    s = d.getElementById('submitbtn');
+    if(age.checked && e.value)
+        s.removeAttribute('disabled');
+    else
+        s.setAttribute('disabled','true');
+}
+
+if(age) age.onchange = checkAge;
+if(e) e.onchange = checkAge;
+
+</script>
+{/literal}
+
+</html>

@@ -1,0 +1,119 @@
+<script>basedir= '{$basedir}'; webroot = '{$webroot}'</script>
+<script src="{$webroot}js/boot.js"></script>
+<script src="{$webroot}js/cwelm.js"></script>
+<script>TRANSLATE = true; TRANSLATE_LANG = '{$app->getLang()}'</script>
+<link href="{$webroot}skin/translate-inline.css" rel="stylesheet" type="text/css" />
+<script src="{$webroot}js/translate-inline-cw.js"></script>
+
+
+{literal}
+<style>
+    a.mails {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Verdana, sans-serif;
+        margin-bottom: 25px;
+    }
+    a.sendMail {
+        color: #555;
+        font-size: 18px;
+        background-color: #eee;
+        border: 1px solid #bbb;
+        padding: 8px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    a.links {
+        color: blue;
+        font-size: 12px;
+        text-decoration: none;
+    }
+    a.links:visited { color: blue; }
+    a.links:hover { text-decoration: underline; }
+    #linkbox {
+        height: 600px;
+        background-color:rgba(28,120,255,0.5);
+        color: black;
+        font-size: 14px;
+        position: fixed;
+        top:0px;
+        right: 0px;
+        padding: 8px;
+        border-left: 3px solid grey;
+        border-bottom: 3px solid grey;
+        line-height: 120%;
+        overflow-y: auto;
+    }
+
+
+</style>
+{/literal}
+
+{assign var="emaildev" value="1"}
+
+{foreach key=name item=t from=$templates}
+{assign var="tpl" value=$t.base}
+<a class="mails" name="{$name}">{translate txt=`$name`_name ns="email"}</a> ({$tpl->getTitle()})
+<a class="sendMail" data-name="{$name}">send</a>
+<input type="text" class="email_address" name="email_address" id="email_address_{$name}" value="{$cfg->getSetting('sendtest_email_address')}">
+<br><br>
+<h5>Subject: {translate txt=`$name`_subject ns="email"}</h5>
+{assign var=tpl_name value=$tpl->getTemplate()}
+{include file=emails/`$tpl_name`.html langpre=$tpl->getLangpre()}
+{if $t.variants}
+{foreach item=params from=$t.variants}
+{assign var="subname" value=$name}
+{foreach item=param key=key from=$params}
+{assign var=$key value=$param}
+{if $param===true || $param===1}
+{assign var=subname value=`$subname`_`$key`}
+{elseif !$param eq false}
+{assign var=subname value=`$subname`_`$param`}
+{/if}
+{/foreach}
+<a class="mails" name="{$subname}">{translate txt=`$name`_name ns="email"}</a> ({$tpl->getTitle()})
+<a class="sendMail" data-name="{$subname}">send</a>
+<input type="text" class="email_address" name="email_address" id="email_address_{$subname}" value="{$cfg->getSetting('sendtest_email_address')}">
+<br><br>
+<h5>Subject: {translate txt=`$subname`_subject ns="email"}</h5>
+{assign var=tpl_name value=$tpl->getTemplate()}
+{include file=emails/`$tpl_name`.html langpre=$tpl->getLangpre()}
+{/foreach}
+{/if}
+{/foreach}
+
+
+<div id="linkbox">
+    <a href="javascript:cw.$('linkbox').css('display', 'none');" style="position: absolute; top: 5px; right: 8px;">close</a>
+    <b>Emails</b><br>
+    <div id="contentTable"></div>
+</div>
+
+
+{literal}
+<script>
+    document.ready(function(){
+        var tmp = "";
+        cw.$$(".mails").each(function(elm) {
+            tmp += '<a class="links" href="#'+elm.attr('name')+'">'+elm.textContent.substr(0,40)+"</a><br />";
+        });
+        cw.$("contentTable").update(tmp);
+
+        cw.$$(".sendMail").each(function(elm) {
+            elm.bind('click', function(ev) {
+                name = ev.target.dattr('name');
+                email = document.getElementById('email_address_'+name).value;
+                new cw.Ajax.Request('{/literal}{$basedir}{literal}emailtest/sendMail?id='+name+'&email='+email, {
+                    onComplete: function(data) {
+                        console.log(data.responseText);
+                        alert(data.responseText);
+                    }
+                });
+            });
+        });
+
+    });
+
+
+</script>
+{/literal}

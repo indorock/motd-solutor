@@ -39,6 +39,12 @@
 
         <front>
             <host>unikrn-motd.vm1</host>
+            <observer>
+                <user_created>
+                    <class><![CDATA[motd/model/emailtrigger]]></class>
+                    <method>onUserCreate</method>
+                </user_created>
+            </observer>
         </front>
 
     </router>

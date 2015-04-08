@@ -248,3 +248,44 @@ CREATE TABLE IF NOT EXISTS `user_logins` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaign`
+--
+
+CREATE TABLE IF NOT EXISTS `campaign` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `emailtemplates`
+--
+
+CREATE TABLE IF NOT EXISTS `emailtemplates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `ord` int(11) NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `template` varchar(30) DEFAULT NULL,
+  `langpre` varchar(30) DEFAULT NULL,
+  `variants` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`),
+
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 AUTO_INCREMENT=3;
+
+--
+-- Dumping data for table `emailtemplates`
+--
+
+INSERT INTO `emailtemplates` (`id`, `name`, `ord`, `active`, `template`, `langpre`, `variants`) VALUES
+(1, 'doi', 100, 1, 'generic', NULL, ''),
+(2, 'doi_confirm', 101, 1, 'doi_confirm', 'doiconfirm', '');
+
