@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+<head>
+    <script>{literal}!function(a){var b=a.readyWait=[];a.ready=function(a){b.push(a)}}(document);{/literal}</script>
+    <title>{translate postfix=$mainurl txt="meta-Title"}</title>
+    <meta name="description" content="{translate postfix=$mainurl txt="meta-Description"}">
+    <meta name="keywords" content="{translate postfix=$mainurl txt="meta-Keywords"}">
+    {if $isInlineTranslate}
+    <meta name="trans_title" content="{translate postfix=$mainurl txt="meta-Title"}">
+    {/if}
+    <link rel="shortcut icon" href="{$skinroot}img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="{$skinroot}img/favicon.ico" type="image/x-icon" />
+
+    {if $cfg->getData('deploymentmode','production') == "development"}
+    <link href="{$skinroot}less/main.less" media="all" rel="stylesheet" type="text/less" />
+    <script>{literal}
+    var ws = window.localStorage,
+            i = ws.length;
+    while(i--)
+        if(ws.key(i).toLowerCase().indexOf('main.less') !== -1)
+            ws.removeItem(ws.key(i));
+    ws.removeItem('mk_events');
+    {/literal}</script>
+    <script src="{$skinroot}/js/less-1.7.3.min.js"></script>
+    {else}
+    <link href="{$skinroot}css/main.css" media="all" type="text/css" rel="stylesheet" />
+    {/if}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    {if $isInlineTranslate}
+    <script>
+        basedir = '{$basedir}';
+        webroot = '{$webroot}';
+        backend = false;
+        TRANSLATE = true;
+        TRANSLATE_LANG = '{$app->getLang()}'
+    </script>
+    <script src="{$webroot}js/boot.js"></script>
+    <script src="{$webroot}js/cwelm.js"></script>
+    <link href="{$webroot}skin/translate-inline.css" rel="stylesheet" type="text/css"/>
+    <script src="{$webroot}js/translate-inline-cw.js"></script>
+    {/if}
+
+</head>
+<body>
+
+<div id="body" class="fixedHeader">
+    {include file="$template"}
+</div>
+
+</body>
+</html>
+

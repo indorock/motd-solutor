@@ -199,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `acl_role` varchar(20) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `doi_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `name` varchar(64) NOT NULL,
   `email` varchar(180) NOT NULL,
   `code` varchar(80) DEFAULT NULL,
@@ -215,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=2 ;
 
 INSERT INTO `user` (`id`, `active`, `role`, `acl_role`, `created_at`, `update_at`, `name`, `email`, `code`, `password`, `salt`, `reset_key`, `reset_created_at`, `is_test`) VALUES
-(1, 1, 10, 'administrator', '2014-07-21 12:45:56', '0000-00-00 00:00:00', 'mark', 'mark@bsolut.com', NULL, '45b615a3fded47032a20eb056050a6b5b3c55425', 'fe1bc', '', '0000-00-00 00:00:00', 0);
+(1, 1, 10, 'administrator', '2014-07-21 12:45:56', '0000-00-00 00:00:00','0000-00-00 00:00:00', 'mark', 'mark@bsolut.com', NULL, '45b615a3fded47032a20eb056050a6b5b3c55425', 'fe1bc', '', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 

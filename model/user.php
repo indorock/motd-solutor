@@ -11,6 +11,7 @@ class Motd_Model_User extends CW_Model_Share_User{
     }
 
     public function handleDoi($request){
+
         $hash = $request->getParam(0);
         if(!$hash || strpos($hash, '_')===false)
             throw new CW_Core_Exception_Ignore('Missing or invalid DOI key supplied');
@@ -38,7 +39,9 @@ class Motd_Model_User extends CW_Model_Share_User{
             $countrycode = strtolower(geoip_country_code_by_name($request->getRemoteAddr()));
 
         $params = array('already_doied'=>$already_doied, 'user_country'=>strtolower($countrycode));
-        CW::getSingleton('emailtrigger')->send('doi_confirm',$this->getEmail(),$params,$this);
+
+        if(!$already_doied)
+            CW::getSingleton('emailtrigger')->send('doi_confirm',$this->getEmail(),$params,$this);
 
         return array('already_doied'=>$already_doied);
     }
